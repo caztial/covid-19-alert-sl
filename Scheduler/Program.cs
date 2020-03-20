@@ -2,20 +2,22 @@
 using Microsoft.Extensions.Configuration;
 using System;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace Scheduler
 {
     class Program
     {
       
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             
             var config = GetConfiguration();
+            Console.WriteLine("CLI Running");
 
             HpbApiService HbpApiService = new HpbApiService(config);
-            
-            Console.WriteLine("CLI Running");
+            await HbpApiService.GetStatusReport();
+
         }
 
         private static IConfiguration GetConfiguration()
