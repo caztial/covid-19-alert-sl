@@ -40,6 +40,7 @@ namespace Application.Services
             {
                 Client.DefaultRequestHeaders.Accept.Clear();
                 Client.DefaultRequestHeaders.Add("User-Agent", "Covid19-Alert-SL");
+                Console.WriteLine(DateTime.UtcNow.ToString()+" Refreshing Endpoint..... ");
 
                 var resoponse = await Client.GetAsync(Configuration["HBP:URL"] + "get-current-statistical");
                 if (resoponse.IsSuccessStatusCode)
@@ -50,7 +51,7 @@ namespace Application.Services
                         NullValueHandling = NullValueHandling.Ignore
                     });
                     await MapToDataContext(payload);
-                    
+                    Console.WriteLine(DateTime.UtcNow.ToString() + " Refreshing Complete ");
                 }
                 else
                 {

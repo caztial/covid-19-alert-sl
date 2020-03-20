@@ -2,6 +2,7 @@
 using Application.Services;
 using Microsoft.Extensions.Configuration;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 
@@ -24,8 +25,13 @@ namespace Scheduler
 
             Console.WriteLine("CLI Running");
 
-            HpbApiService HbpApiService = new HpbApiService(configuration, dataContext);
-            await HbpApiService.GetStatusReport();
+            while (true)
+            {
+                HpbApiService HbpApiService = new HpbApiService(configuration, dataContext);
+                await HbpApiService.GetStatusReport();
+                Thread.Sleep(1000 * 60 * 5);
+            }
+            
 
         }
 
