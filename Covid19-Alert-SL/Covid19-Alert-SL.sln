@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29905.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scheduler", "Scheduler\Scheduler.csproj", "{3BF3E750-BDDF-4037-B284-04350D35A98B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{F3ADBB1F-BB89-4A48-989C-03500767F26F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{4964DE30-7E88-49FB-8F3F-2BF9C1D85893}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3BF3E750-BDDF-4037-B284-04350D35A98B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BF3E750-BDDF-4037-B284-04350D35A98B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BF3E750-BDDF-4037-B284-04350D35A98B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BF3E750-BDDF-4037-B284-04350D35A98B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3ADBB1F-BB89-4A48-989C-03500767F26F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3ADBB1F-BB89-4A48-989C-03500767F26F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3ADBB1F-BB89-4A48-989C-03500767F26F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3ADBB1F-BB89-4A48-989C-03500767F26F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4964DE30-7E88-49FB-8F3F-2BF9C1D85893}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4964DE30-7E88-49FB-8F3F-2BF9C1D85893}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4964DE30-7E88-49FB-8F3F-2BF9C1D85893}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4964DE30-7E88-49FB-8F3F-2BF9C1D85893}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C4A90863-632A-4202-B515-D4699F2CAE71}
+	EndGlobalSection
+EndGlobal
