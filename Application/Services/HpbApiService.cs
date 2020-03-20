@@ -50,7 +50,6 @@ namespace Application.Services
                         NullValueHandling = NullValueHandling.Ignore
                     });
                     await MapToDataContext(payload);
-                    Console.Write(payload.ToString());
                     
                 }
                 else
@@ -138,7 +137,39 @@ namespace Application.Services
                 hpbStatistic.HospitalStatuses.Add(hpbHospitalStatus);
             }
 
+            await NotificationTriggerCheck(hpbStatistic);
             await DataContext.SaveChangesAsync();
+        }
+
+        public async Task NotificationTriggerCheck(HpbStatistic hpbStatistic)
+        {
+            var lastRecord = await DataContext.HpbStatistic
+                .OrderByDescending(d => d.LastUpdate)
+                .FirstOrDefaultAsync();
+
+            // if there is no record trigger the notification
+            if (lastRecord == null)
+            {
+                await TriggerNotification(hpbStatistic);
+         
+            }
+            else
+            {
+                // Local Cases increase or decrese
+                if (lastRecord.LocalTotalCases != hpbStatistic.LocalTotalCases)
+                    await TriggerNotification(hpbStatistic);
+            }
+
+        }
+
+        public async Task TriggerNotification(HpbStatistic hpbStatistic)
+        {
+            Console.WriteLine("Total Cases " + hpbStatistic.LocalTotalCases);
+            Console.WriteLine("New Cases " + hpbStatistic.LocalNewCases);
+            Console.WriteLine("In Hospitals " + hpbStatistic.LocalTotalNumberOfIndividualsInHospitals);
+            Console.WriteLine("Total Recoverd " + hpbStatistic.LocalRecoverd);
+            Console.WriteLine("Total Deaths " + hpbStatistic.LocalNewDeaths);
+            Console.WriteLine("More info visit https://www.hpb.health.gov.lk/");
         }
     }
 }
