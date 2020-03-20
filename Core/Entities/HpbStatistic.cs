@@ -19,5 +19,6 @@ namespace Core.Entities
         public int GlobalNewDeaths { get; set; }
         public int GlobalRecovered { get; set; }
         public DateTime LastUpdate { get; set; }
+        public ICollection<HpbHospitalStatus> HospitalStatuses { get; set; }
     }
 }

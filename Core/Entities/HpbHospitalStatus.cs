@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Core.Entities
 {
-    class HpbHospitalStatus
+    public class HpbHospitalStatus
     {
         public int Id { get; set; }
         public int HospitalId { get; set; }
@@ -17,5 +17,7 @@ namespace Core.Entities
         public DateTime DeletedAt { get; set; }
         public int CumulativeTotal { get; set; }
         public int TreatmentTotal { get; set; }
+        public HpbStatistic HpbStatistic { get; set; }
+        public HpbHospital HpbHospital { get; set; }
     }
 }

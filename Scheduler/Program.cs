@@ -19,6 +19,8 @@ namespace Scheduler
             configuration = GetConfiguration();
             dataContext = new DataContext(configuration);
 
+            dataContext.Database.EnsureCreated();
+
             Console.WriteLine("CLI Running");
 
             HpbApiService HbpApiService = new HpbApiService(configuration);
