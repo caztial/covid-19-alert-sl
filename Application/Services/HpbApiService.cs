@@ -2,11 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Application.Services
@@ -23,7 +19,7 @@ namespace Application.Services
         public async Task GetStatusReport()
         {
             client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Add("User-Agent", "Covid19-Alter-SL");
+            client.DefaultRequestHeaders.Add("User-Agent", "Covid19-Alert-SL");
 
             var resoponse = await client.GetAsync(Configuration["HBP:URL"]+ "get-current-statistical");
             if (resoponse.IsSuccessStatusCode)

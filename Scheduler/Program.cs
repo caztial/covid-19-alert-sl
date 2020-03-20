@@ -1,21 +1,27 @@
-﻿using Application.Services;
+﻿using Application.Infastructure.Persistance;
+using Application.Services;
 using Microsoft.Extensions.Configuration;
 using System;
-using System.IO;
 using System.Threading.Tasks;
+
 
 namespace Scheduler
 {
     class Program
     {
-      
+
+        private static DataContext dataContext;
+
+        private static IConfiguration configuration;
         static async Task Main(string[] args)
         {
             
-            var config = GetConfiguration();
+            configuration = GetConfiguration();
+            dataContext = new DataContext(configuration);
+
             Console.WriteLine("CLI Running");
 
-            HpbApiService HbpApiService = new HpbApiService(config);
+            HpbApiService HbpApiService = new HpbApiService(configuration);
             await HbpApiService.GetStatusReport();
 
         }

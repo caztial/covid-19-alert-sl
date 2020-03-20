@@ -1,5 +1,11 @@
 {
   "HBP": {
-    "URL":"https://www.hpb.health.gov.lk/api/"
+    "URL": "https://www.hpb.health.gov.lk/api/"
+  },
+  "ActiveDatabase": "Sqlite",
+  "Database": {
+    "Sqlite": "Filename=data.db",
+    "Mssql": "",
+    "MySql":  ""
   }
 }
