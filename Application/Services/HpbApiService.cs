@@ -1,9 +1,13 @@
 ﻿using Application.Infastructure.Persistance;
 using Application.Models;
+using Core.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Polly;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -18,15 +22,13 @@ namespace Application.Services
         {
             Configuration = configuration;
             DataContext = dataContext;
-            Client = new HttpClient();
-            
-
+            Client = new HttpClient();            
         }
 
         public async Task GetStatusReport()
         {
             var RetryGetRequest = Policy
-              .Handle<Exception>()
+              .Handle<HttpRequestException>()
               .WaitAndRetry(new[]
               {
                 TimeSpan.FromSeconds(5),
@@ -47,16 +49,96 @@ namespace Application.Services
                     {
                         NullValueHandling = NullValueHandling.Ignore
                     });
+                    await MapToDataContext(payload);
                     Console.Write(payload.ToString());
+                    
                 }
                 else
                 {
                     Console.WriteLine("Endpoint error " + resoponse.StatusCode);
+                   
                 }
 
             });
-            
-            
+          
+        }
+
+        public async Task MapToDataContext(HpbStatisticResponse hpbStatisticResponse)
+        {
+            var response = hpbStatisticResponse.Data;
+            // Check if the record existing in the database using the last updated time
+            var flag = await DataContext.HpbStatistic
+                .Where(u => u.LastUpdate.Equals(response.update_date_time))
+                .AsNoTracking()
+                .CountAsync();
+            // if the record alredy existing skip this record;
+            if (flag != 0)
+                return;
+
+            // Add the record to the Statistic table
+            HpbStatistic hpbStatistic = new HpbStatistic 
+            {
+                LastUpdate = response.update_date_time,  
+                LocalNewCases = response.local_new_cases,
+                LocalDeaths = response.local_new_deaths,
+                LocalNewDeaths = response.local_new_deaths,
+                LocalRecoverd = response.local_recovered,
+                LocalTotalCases = response.local_total_cases,
+                LocalTotalNumberOfIndividualsInHospitals = response.local_total_number_of_individuals_in_hospitals,
+                GlobalDeaths = response.global_deaths,
+                GlobalNewCases = response.global_new_cases,
+                GlobalNewDeaths = response.global_new_deaths,
+                GlobalRecovered = response.global_recovered,
+                GlobalTotalCases = response.global_total_cases                
+            };
+
+            DataContext.HpbStatistic.Add(hpbStatistic);
+            hpbStatistic.HospitalStatuses = new List<HpbHospitalStatus>();
+            // Add Hospital Status 
+            foreach (var data in response.hospital_data)
+            {
+                // check if the hospital exisiting
+                var hospital = await DataContext.HpbHospital
+                    .Where(i => i.Id.Equals(data.hospital.id))
+                    .FirstOrDefaultAsync();
+
+                if (hospital == null)
+                {
+                    // if not create a new hospital
+                    HpbHospital hpbHospital = new HpbHospital
+                    {
+                        Id = data.hospital.id,
+                        Name = data.hospital.name,
+                        NameSinhala = data.hospital.name_si,
+                        NameTamil = data.hospital.name_ta,
+                        CreatedAt = data.hospital.created_at,
+                        UpdatedAt = data.hospital.updated_at,
+                        DeletedAt = data.hospital.deleted_at,
+                    };
+
+                    DataContext.HpbHospital.Add(hpbHospital);
+                    hospital = hpbHospital;
+                }
+                
+                
+                HpbHospitalStatus hpbHospitalStatus = new HpbHospitalStatus
+                {
+                    CreatedAt = data.created_at,
+                    CumulativeForeign = data.cumulative_foreign,
+                    CumulativeLocal = data.cumulative_local,
+                    CumulativeTotal = data.cumulative_total,
+                    DeletedAt = data.deleted_at,
+                    UpdatedAt = data.updated_at,
+                    TreatmentForeign = data.treatment_foreign,
+                    TreatmentLocal = data.treatment_local,
+                    TreatmentTotal = data.treatment_total,
+                    HpbHospital = hospital
+                };
+               
+                hpbStatistic.HospitalStatuses.Add(hpbHospitalStatus);
+            }
+
+            await DataContext.SaveChangesAsync();
         }
     }
 }

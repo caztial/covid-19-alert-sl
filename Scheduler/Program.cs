@@ -18,6 +18,7 @@ namespace Scheduler
             
             configuration = GetConfiguration();
             dataContext = new DataContext(configuration);
+            //dataContext.Database.EnsureDeleted();
             dataContext.Database.EnsureCreated();
 
 

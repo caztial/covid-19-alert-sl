@@ -22,8 +22,7 @@ namespace Application.Models
 
     public class HpbStatisticData
     {
-        [JsonPropertyName("update_date_time")]
-        public DateTime LastUpdate { get; set; }
+        public DateTime update_date_time { get; set; }
         public int local_new_cases { get; set; }
         public int local_total_cases { get; set; }
         public int local_total_number_of_individuals_in_hospitals { get; set; }
