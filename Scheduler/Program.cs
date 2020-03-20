@@ -10,20 +10,20 @@ namespace Scheduler
     class Program
     {
 
-        private static DataContext dataContext;
+        public static DataContext dataContext;
 
-        private static IConfiguration configuration;
+        public static IConfiguration configuration;
         static async Task Main(string[] args)
         {
             
             configuration = GetConfiguration();
             dataContext = new DataContext(configuration);
-
             dataContext.Database.EnsureCreated();
+
 
             Console.WriteLine("CLI Running");
 
-            HpbApiService HbpApiService = new HpbApiService(configuration);
+            HpbApiService HbpApiService = new HpbApiService(configuration, dataContext);
             await HbpApiService.GetStatusReport();
 
         }
