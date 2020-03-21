@@ -22,7 +22,10 @@ namespace Application.Services
         {
             Configuration = configuration;
             DataContext = dataContext;
-            Client = new HttpClient();            
+            Client = new HttpClient(new HttpClientHandler()
+            {
+                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+            });            
         }
 
         public async Task GetStatusReport()
