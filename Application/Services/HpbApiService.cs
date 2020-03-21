@@ -1,4 +1,7 @@
-﻿using Application.Infastructure.Persistance;
+﻿using Application.Infastructure.Notification;
+using Application.Infastructure.Notification.Twitter;
+using Application.Infastructure.Persistance;
+
 using Application.Models;
 using Core.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -16,8 +19,9 @@ namespace Application.Services
     public class HpbApiService
     {
         private IConfiguration Configuration { get; set; }
-        private HttpClient Client;
-        private DataContext DataContext; 
+        private HttpClient Client { get; set; }
+        private DataContext DataContext { get; set; }
+        private List<INotification> Notifications { get; set; }
         public HpbApiService(IConfiguration configuration, DataContext dataContext)
         {
             Configuration = configuration;
@@ -25,7 +29,12 @@ namespace Application.Services
             Client = new HttpClient(new HttpClientHandler()
             {
                 ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-            });            
+            });
+
+            Notifications = new List<INotification>
+            {
+                new Twitter(configuration)
+            };
         }
 
         public async Task GetStatusReport()
@@ -174,6 +183,11 @@ namespace Application.Services
             Console.WriteLine("Total Recoverd " + hpbStatistic.LocalRecoverd);
             Console.WriteLine("Total Deaths " + hpbStatistic.LocalNewDeaths);
             Console.WriteLine("More info visit https://www.hpb.health.gov.lk/");
+
+            foreach (var notification in Notifications)
+            {
+                notification.Publish(hpbStatistic);
+            }
         }
     }
 }

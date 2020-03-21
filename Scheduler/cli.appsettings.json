@@ -6,6 +6,12 @@
   "Database": {
     "Sqlite": "Filename=data.db",
     "Mssql": "",
-    "MySql":  ""
+    "MySql": ""
+  },
+  "Twitter": {
+    "ConsumerKey": "",
+    "ConsumerSecret": "",
+    "UserToken": "",
+    "UserSecret": ""
   }
 }
