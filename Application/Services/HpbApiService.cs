@@ -1,4 +1,5 @@
 ﻿using Application.Infastructure.Notification;
+using Application.Infastructure.Notification.Poster;
 using Application.Infastructure.Notification.Twitter;
 using Application.Infastructure.Persistance;
 
@@ -33,6 +34,7 @@ namespace Application.Services
 
             Notifications = new List<INotification>
             {
+                new ImageNotification(configuration),
                 new Twitter(configuration)
             };
         }
@@ -169,7 +171,8 @@ namespace Application.Services
             else
             {
                 // Local Cases increase or decrese
-                if (lastRecord.LocalTotalCases != hpbStatistic.LocalTotalCases)
+                if (lastRecord.LocalTotalCases != hpbStatistic.LocalTotalCases 
+                    || lastRecord.LocalTotalNumberOfIndividualsInHospitals != hpbStatistic.LocalTotalNumberOfIndividualsInHospitals)
                     await TriggerNotification(hpbStatistic);
             }
 
