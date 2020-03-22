@@ -1,6 +1,8 @@
 {
   "HBP": {
-    "URL": "https://www.hpb.health.gov.lk/api/"
+    "URL": "https://www.hpb.health.gov.lk/api/",
+    "LatestUpdateImage": "Infastructure/Notification/Poster/HPBImage.png",
+    "font": "Infastructure/Notification/Poster/OpenSans-Regular.ttf"
   },
   "ActiveDatabase": "Sqlite",
   "Database": {

@@ -1,6 +1,10 @@
 ﻿using Core.Entities;
-using ImageMagick;
 using Microsoft.Extensions.Configuration;
+using SixLabors.Fonts;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
+using SixLabors.ImageSharp.PixelFormats;
+using SixLabors.Primitives;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,47 +27,27 @@ namespace Application.Infastructure.Notification.Poster
 
         public string CreateStatusUpdatePoster(HpbStatistic hpbStatistic)
         {
-            using MagickImage image = new MagickImage(Configuration["HBP:LatestUpdateImage"]);
+            using (Image image = Image.Load(Configuration["HBP:LatestUpdateImage"]))
+            {
+                FontCollection fonts = new FontCollection();
+                FontFamily fontFamily = fonts.Install(Configuration["HBP:font"]);
+               
+                String dateAndTime = hpbStatistic.LastUpdate.ToString("dd.MM.yyyy") + " - " + hpbStatistic.LastUpdate.ToShortTimeString();
+                
+                image.Mutate(ctx => ctx.DrawText(dateAndTime, new Font(fontFamily, 92, FontStyle.Bold), Color.White, new PointF(230, 427)));
 
-            String dateAndTime = hpbStatistic.LastUpdate.ToString("dd.MM.yyyy") + " - " + hpbStatistic.LastUpdate.ToShortTimeString();
-            _ = new Drawables()
-            .FontPointSize(92.0)
-            .Font("Arial", FontStyleType.Normal, FontWeight.Bold, FontStretch.ExtraExpanded)
-            .StrokeColor(MagickColors.White)
-            .FillColor(MagickColors.White)
-            .TextAlignment(TextAlignment.Center)
-            .Text(670, 500, dateAndTime)
-            .Draw(image);
+                image.Mutate(ctx => ctx.DrawText(hpbStatistic.LocalTotalCases.ToString(), 
+                                new Font(fontFamily, 130, FontStyle.Bold), Color.FromRgb(210, 9, 61), new PointF(125, 660)));
+                image.Mutate(ctx => ctx.DrawText(hpbStatistic.LocalTotalNumberOfIndividualsInHospitals.ToString(), 
+                                new Font(fontFamily, 130, FontStyle.Bold), Color.FromRgb(210, 9, 61), new PointF(100, 1110)));
 
-            MagickColor numbrColor = new MagickColor(210, 9, 61);
-            _ = new Drawables()
-            .FontPointSize(130.0)
-            .Font("Arial", FontStyleType.Normal, FontWeight.Bold, FontStretch.ExtraExpanded)
-            .StrokeColor(numbrColor)
-            .FillColor(numbrColor)
-            .TextAlignment(TextAlignment.Center)
-            .Text(200, 770, hpbStatistic.LocalTotalCases.ToString())
-            .Draw(image);
-
-            _ = new Drawables()
-            .FontPointSize(130.0)
-            .Font("Arial", FontStyleType.Normal, FontWeight.Bold, FontStretch.ExtraExpanded)
-            .StrokeColor(numbrColor)
-            .FillColor(numbrColor)
-            .TextAlignment(TextAlignment.Center)
-            .Text(200, 1200, hpbStatistic.LocalTotalNumberOfIndividualsInHospitals.ToString())
-            .Draw(image);
-
-            String imageName = "status_update_" + hpbStatistic.Id+".png";
-            image.Write(imageName);
-
-            // lossless compression to reduce size
-            FileInfo finalImage = new FileInfo(imageName);
-            ImageOptimizer optimizer = new ImageOptimizer();
-            optimizer.LosslessCompress(finalImage);
-            finalImage.Refresh();
-
-            return imageName;
+                image.Mutate(ctx => ctx.DrawText("New Cases : "+ hpbStatistic.LocalNewCases.ToString(),
+                                new Font(fontFamily, 40, FontStyle.Bold), Color.FromRgb(210, 9, 61), new PointF(80, 850)));
+                String imageName = "status_update_" + hpbStatistic.Id + ".png";
+                image.Save(imageName);
+                return imageName;
+            }            
+            
         }
     }
 }
