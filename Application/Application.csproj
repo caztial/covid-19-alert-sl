@@ -28,7 +28,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Infastructure/Notification/Poster/OpenSans-Regular.ttf">
+    <Content Include="Infastructure/Notification/Poster/arial-black.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

@@ -3,12 +3,8 @@ using Microsoft.Extensions.Configuration;
 using SixLabors.Fonts;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
-using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.Primitives;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
 
 namespace Application.Infastructure.Notification.Poster
 {
@@ -32,17 +28,22 @@ namespace Application.Infastructure.Notification.Poster
                 FontCollection fonts = new FontCollection();
                 FontFamily fontFamily = fonts.Install(Configuration["HBP:font"]);
                
-                String dateAndTime = hpbStatistic.LastUpdate.ToString("dd.MM.yyyy") + " - " + hpbStatistic.LastUpdate.ToShortTimeString();
-                
-                image.Mutate(ctx => ctx.DrawText(dateAndTime, new Font(fontFamily, 92, FontStyle.Bold), Color.White, new PointF(230, 427)));
+                String dateAndTime = hpbStatistic.LastUpdate.ToString("dd.MM.yyyy") + " - " + hpbStatistic.LastUpdate.ToString("hh.mm tt");
+
+                image.Mutate(ctx => ctx.DrawText(dateAndTime, new Font(fontFamily, 60, FontStyle.Bold), Color.White, new PointF(188, 350)));
 
                 image.Mutate(ctx => ctx.DrawText(hpbStatistic.LocalTotalCases.ToString(), 
-                                new Font(fontFamily, 130, FontStyle.Bold), Color.FromRgb(210, 9, 61), new PointF(125, 660)));
-                image.Mutate(ctx => ctx.DrawText(hpbStatistic.LocalTotalNumberOfIndividualsInHospitals.ToString(), 
-                                new Font(fontFamily, 130, FontStyle.Bold), Color.FromRgb(210, 9, 61), new PointF(100, 1110)));
-
+                                new Font(fontFamily, 80, FontStyle.Bold), Color.FromRgb(210, 9, 61), new PointF(125, 530)));
+                
                 image.Mutate(ctx => ctx.DrawText("New Cases : "+ hpbStatistic.LocalNewCases.ToString(),
-                                new Font(fontFamily, 40, FontStyle.Bold), Color.FromRgb(210, 9, 61), new PointF(80, 850)));
+                                new Font(fontFamily, 25, FontStyle.Bold), Color.FromRgb(210, 9, 61), new PointF(90, 685)));
+
+                image.Mutate(ctx => ctx.DrawText(hpbStatistic.LocalTotalNumberOfIndividualsInHospitals.ToString(),
+                                new Font(fontFamily, 80, FontStyle.Bold), Color.FromRgb(210, 9, 61), new PointF(90, 870)));
+
+                image.Mutate(ctx => ctx.DrawText(hpbStatistic.LocalRecoverd.ToString(),
+                                new Font(fontFamily, 90, FontStyle.Bold), Color.ForestGreen, new PointF(110, 1232)));
+
                 String imageName = "status_update_" + hpbStatistic.Id + ".png";
                 image.Save(imageName);
                 return imageName;
