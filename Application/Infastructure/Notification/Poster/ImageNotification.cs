@@ -30,10 +30,10 @@ namespace Application.Infastructure.Notification.Poster
                
                 String dateAndTime = hpbStatistic.LastUpdate.ToString("dd.MM.yyyy") + " - " + hpbStatistic.LastUpdate.ToString("hh.mm tt");
 
-                image.Mutate(ctx => ctx.DrawText(dateAndTime, new Font(fontFamily, 60, FontStyle.Bold), Color.White, new PointF(125, 350)));
+                image.Mutate(ctx => ctx.DrawText(dateAndTime, new Font(fontFamily, 60, FontStyle.Bold), Color.White, new PointF(188, 350)));
 
                 image.Mutate(ctx => ctx.DrawText(hpbStatistic.LocalTotalCases.ToString(), 
-                                new Font(fontFamily, 80, FontStyle.Bold), Color.FromRgb(210, 9, 61), new PointF(125, 530)));
+                                new Font(fontFamily, 80, FontStyle.Bold), Color.FromRgb(210, 9, 61), new PointF(90, 530)));
                 
                 image.Mutate(ctx => ctx.DrawText("New Cases : "+ hpbStatistic.LocalNewCases.ToString(),
                                 new Font(fontFamily, 25, FontStyle.Bold), Color.FromRgb(210, 9, 61), new PointF(90, 685)));
