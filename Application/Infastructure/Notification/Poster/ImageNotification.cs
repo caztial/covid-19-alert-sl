@@ -30,7 +30,7 @@ namespace Application.Infastructure.Notification.Poster
                
                 String dateAndTime = hpbStatistic.LastUpdate.ToString("dd.MM.yyyy") + " - " + hpbStatistic.LastUpdate.ToString("hh.mm tt");
 
-                image.Mutate(ctx => ctx.DrawText(dateAndTime, new Font(fontFamily, 60, FontStyle.Bold), Color.White, new PointF(188, 350)));
+                image.Mutate(ctx => ctx.DrawText(dateAndTime, new Font(fontFamily, 60, FontStyle.Bold), Color.White, new PointF(125, 350)));
 
                 image.Mutate(ctx => ctx.DrawText(hpbStatistic.LocalTotalCases.ToString(), 
                                 new Font(fontFamily, 80, FontStyle.Bold), Color.FromRgb(210, 9, 61), new PointF(125, 530)));
@@ -45,6 +45,7 @@ namespace Application.Infastructure.Notification.Poster
                                 new Font(fontFamily, 90, FontStyle.Bold), Color.ForestGreen, new PointF(110, 1232)));
 
                 String imageName = "status_update_" + hpbStatistic.Id + ".png";
+
                 image.Save(imageName);
                 return imageName;
             }            
