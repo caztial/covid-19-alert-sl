@@ -30,21 +30,26 @@ namespace Application.Infastructure.Notification.Poster
                
                 String dateAndTime = hpbStatistic.LastUpdate.ToString("dd.MM.yyyy") + " - " + hpbStatistic.LastUpdate.ToString("hh.mm tt");
 
-                image.Mutate(ctx => ctx.DrawText(dateAndTime, new Font(fontFamily, 60, FontStyle.Bold), Color.White, new PointF(188, 350)));
+                image.Mutate(ctx => ctx.DrawText(dateAndTime, new Font(fontFamily, 60, FontStyle.Bold), Color.White, new PointF(50, 275)));
+
+                int totalActive = hpbStatistic.LocalTotalCases - hpbStatistic.LocalRecoverd;
 
                 image.Mutate(ctx => ctx.DrawText(hpbStatistic.LocalTotalCases.ToString(), 
-                                new Font(fontFamily, 80, FontStyle.Bold), Color.FromRgb(210, 9, 61), new PointF(90, 530)));
+                                new Font(fontFamily, 80, FontStyle.Bold), Color.FromRgb(210, 9, 61), new PointF(40, 440)));
                 
                 image.Mutate(ctx => ctx.DrawText("New Cases : "+ hpbStatistic.LocalNewCases.ToString(),
-                                new Font(fontFamily, 25, FontStyle.Bold), Color.FromRgb(210, 9, 61), new PointF(90, 685)));
+                                new Font(fontFamily, 25, FontStyle.Bold), Color.FromRgb(210, 9, 61), new PointF(30, 600)));
+
+                image.Mutate(ctx => ctx.DrawText(totalActive.ToString(),
+                                new Font(fontFamily, 80, FontStyle.Bold), Color.FromRgb(210, 9, 61), new PointF(40, 720)));
 
                 image.Mutate(ctx => ctx.DrawText(hpbStatistic.LocalTotalNumberOfIndividualsInHospitals.ToString(),
-                                new Font(fontFamily, 80, FontStyle.Bold), Color.FromRgb(210, 9, 61), new PointF(90, 870)));
+                                new Font(fontFamily, 80, FontStyle.Bold), Color.FromRgb(210, 9, 61), new PointF(40, 1025)));
 
                 image.Mutate(ctx => ctx.DrawText(hpbStatistic.LocalRecoverd.ToString(),
-                                new Font(fontFamily, 90, FontStyle.Bold), Color.ForestGreen, new PointF(110, 1232)));
+                                new Font(fontFamily, 90, FontStyle.Bold), Color.ForestGreen, new PointF(70, 1300)));
 
-                String imageName = "status_update_" + hpbStatistic.Id + ".png";
+                String imageName = "status_update_" + hpbStatistic.Id + ".jpg";
 
                 image.Save(imageName);
                 return imageName;

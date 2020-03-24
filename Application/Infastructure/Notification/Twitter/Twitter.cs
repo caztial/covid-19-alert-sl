@@ -27,7 +27,7 @@ namespace Application.Infastructure.Notification.Twitter
             
             if(type == TwitterNotificationTypes.STATUS_UPDATE)
             {
-                byte[] status_update_post = File.ReadAllBytes("status_update_" + hpbStatistic.Id + ".png");
+                byte[] status_update_post = File.ReadAllBytes("status_update_" + hpbStatistic.Id + ".jpg");
 
                 var publishedTweet = Auth.ExecuteOperationWithCredentials(userCredentials, () =>
                 {

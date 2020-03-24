@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Infastructure/Notification/Poster/HPBImage.png">
+    <Content Include="Infastructure/Notification/Poster/HPBImage.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
