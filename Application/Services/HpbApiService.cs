@@ -35,7 +35,7 @@ namespace Application.Services
             Notifications = new List<INotification>
             {
                 new ImageNotification(configuration),
-                new Twitter(configuration)
+                //new Twitter(configuration)
             };
         }
 
