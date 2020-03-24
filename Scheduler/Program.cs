@@ -19,14 +19,24 @@ namespace Scheduler
             
             configuration = GetConfiguration();
             dataContext = new DataContext(configuration);
+            //dataContext.Database.EnsureDeleted();
             dataContext.Database.EnsureCreated();
 
             Console.WriteLine("CLI Running");
 
             while (true)
             {
-                HpbApiService HbpApiService = new HpbApiService(configuration, dataContext);
-                await HbpApiService.GetStatusReport();
+                try
+                {
+                    HpbApiService HbpApiService = new HpbApiService(configuration, dataContext);
+                    await HbpApiService.GetStatusReport();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Service Exception");
+                    Console.WriteLine(e.ToString());
+                }
+                
                 Thread.Sleep(1000 * 60 * 5);
             }
             
