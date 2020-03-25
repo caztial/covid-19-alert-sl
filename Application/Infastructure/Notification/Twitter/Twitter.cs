@@ -47,6 +47,7 @@ namespace Application.Infastructure.Notification.Twitter
         public void Publish(HpbStatistic hpbStatistic)
         {
             string tweet = "Total Cases - " + hpbStatistic.LocalTotalCases +"\n";
+            tweet += "Active Cases - " + hpbStatistic.LocalActiveCases + "\n";
             tweet += "New Cases - " + hpbStatistic.LocalNewCases + "\n";
             tweet += "In Hospitals - " + hpbStatistic.LocalTotalNumberOfIndividualsInHospitals + "\n";
             tweet += "Total Recoverd - " + hpbStatistic.LocalRecoverd + "\n";

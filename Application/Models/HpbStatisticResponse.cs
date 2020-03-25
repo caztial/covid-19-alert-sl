@@ -29,6 +29,7 @@ namespace Application.Models
         public int local_deaths { get; set; }
         public int local_new_deaths { get; set; }
         public int local_recovered { get; set; }
+        public int local_active_cases { get; set; }
         public int global_new_cases { get; set; }
         public int global_total_cases { get; set; }
         public int global_deaths { get; set; }

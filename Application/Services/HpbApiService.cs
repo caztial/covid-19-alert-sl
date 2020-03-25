@@ -98,6 +98,7 @@ namespace Application.Services
                 LocalNewDeaths = response.local_new_deaths,
                 LocalRecoverd = response.local_recovered,
                 LocalTotalCases = response.local_total_cases,
+                LocalActiveCases = response.local_active_cases,
                 LocalTotalNumberOfIndividualsInHospitals = response.local_total_number_of_individuals_in_hospitals,
                 GlobalDeaths = response.global_deaths,
                 GlobalNewCases = response.global_new_cases,
@@ -172,7 +173,8 @@ namespace Application.Services
             {
                 // Local Cases increase or decrese
                 if (lastRecord.LocalTotalCases != hpbStatistic.LocalTotalCases 
-                    || lastRecord.LocalTotalNumberOfIndividualsInHospitals != hpbStatistic.LocalTotalNumberOfIndividualsInHospitals)
+                    || lastRecord.LocalTotalNumberOfIndividualsInHospitals != hpbStatistic.LocalTotalNumberOfIndividualsInHospitals
+                    || lastRecord.LocalRecoverd != hpbStatistic.LocalRecoverd)
                     await TriggerNotification(hpbStatistic);
             }
 

@@ -9,6 +9,7 @@ namespace Core.Entities
         public Guid Id { get; set; }
         public int LocalNewCases { get; set; }
         public int LocalTotalCases { get; set; }
+        public int LocalActiveCases { get; set; }
         public int LocalTotalNumberOfIndividualsInHospitals { get; set; }
         public int LocalDeaths { get; set; }
         public int LocalNewDeaths { get; set; }
