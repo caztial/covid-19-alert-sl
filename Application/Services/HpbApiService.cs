@@ -1,4 +1,5 @@
 ﻿using Application.Infastructure.Notification;
+using Application.Infastructure.Notification.Facebook;
 using Application.Infastructure.Notification.Poster;
 using Application.Infastructure.Notification.Twitter;
 using Application.Infastructure.Persistance;
@@ -35,7 +36,8 @@ namespace Application.Services
             Notifications = new List<INotification>
             {
                 new ImageNotification(configuration),
-                new Twitter(configuration)
+                new Twitter(configuration),
+                new FacebookPage(configuration)                
             };
         }
 

@@ -1,7 +1,7 @@
 {
   "HBP": {
     "URL": "https://www.hpb.health.gov.lk/api/",
-    "LatestUpdateImage": "Infastructure/Notification/Poster/HPBImage.png",
+    "LatestUpdateImage": "Infastructure/Notification/Poster/HPBImage.jpg",
     "font": "Infastructure/Notification/Poster/arial-black.ttf"
   },
   "ActiveDatabase": "Sqlite",
@@ -15,5 +15,8 @@
     "ConsumerSecret": "",
     "UserToken": "",
     "UserSecret": ""
+  },
+  "Facebook": {
+    "Token": ""
   }
 }
