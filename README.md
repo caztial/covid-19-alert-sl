@@ -9,6 +9,7 @@ App will be using  https://www.hpb.health.gov.lk/api/get-current-statistical to 
 **TO DO** 
 
  - Twitter Notification - Avaialble  https://twitter.com/CovidLk
- - Web Push Notification - Pending
+ - Facebook Notification - Available https://www.facebook.com/covid19SLAlerts
+ - Instagram Notification - Pending
 
 **Special Thanks to @rukshn(https://twitter.com/JustRuky) for providing his Twitter Developer Account.**
