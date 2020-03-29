@@ -96,7 +96,7 @@ namespace Application.Services
             {
                 LastUpdate = response.update_date_time,  
                 LocalNewCases = response.local_new_cases,
-                LocalDeaths = response.local_new_deaths,
+                LocalDeaths = response.local_deaths,
                 LocalNewDeaths = response.local_new_deaths,
                 LocalRecoverd = response.local_recovered,
                 LocalTotalCases = response.local_total_cases,
