@@ -175,6 +175,7 @@ namespace Application.Services
             {
                 // Local Cases increase or decrese
                 if (lastRecord.LocalTotalCases != hpbStatistic.LocalTotalCases 
+                    || lastRecord.LocalActiveCases != hpbStatistic.LocalActiveCases
                     || lastRecord.LocalTotalNumberOfIndividualsInHospitals != hpbStatistic.LocalTotalNumberOfIndividualsInHospitals
                     || lastRecord.LocalRecoverd != hpbStatistic.LocalRecoverd)
                     await TriggerNotification(hpbStatistic);
