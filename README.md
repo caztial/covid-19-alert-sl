@@ -5,6 +5,7 @@ Only send update if the active patient count changes
 
 App will be using  https://www.hpb.health.gov.lk/api/get-current-statistical to get offical data
 
+Docker Repo https://hub.docker.com/r/manojfdo/covid-19-alert-sl
 
 **TO DO** 
 
