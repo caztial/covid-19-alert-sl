@@ -1,0 +1,16 @@
+﻿@using Data.Model
+<li class="@PageDataRef.GetActiveClass()">
+    <NavLink href="@PageDataRef.GetUrl()" Match="NavLinkMatch.Prefix" @onclick="onClickMenuItem">
+        <i class="fa @PageDataRef.GetPageIcon()"></i>
+        <p>@PageDataRef.GetPageName()</p>
+    </NavLink>
+
+</li>
+
+@code {
+    [Parameter]
+    public PageData PageDataRef { get; set; }
+
+    [Parameter]
+    public EventCallback onClickMenuItem { get; set; }
+}

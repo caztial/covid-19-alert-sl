@@ -1,0 +1,38 @@
+﻿@using Dashboard.Data.Model
+@inject Data.Services.AppData AppData
+
+<div class="logo">
+    <a href="#" class="simple-text logo-mini">
+        <!-- <div class="logo-image-small">
+          <img src="./assets/img/logo-small.png">
+        </div> -->
+        <!-- <p>CT</p> -->
+    </a>
+    <a href="#" class="simple-text logo-normal">
+        @AppData.AppTitle
+        <!-- <div class="logo-image-big">
+          <img src="../assets/img/logo-big.png">
+        </div> -->
+    </a>
+</div>
+<div class="sidebar-wrapper">
+    <ul class="nav">
+        @foreach (KeyValuePair<string, PageData> refData in AppData.PageDataHash)
+        {
+            <Dashboard.Shared.Components.SideMenuItem PageDataRef="@refData.Value" onClickMenuItem="@(e => handleOnClickMenuItem(refData.Key))" />
+        }
+    </ul>
+</div>
+
+}
+
+@code {
+    private void handleOnClickMenuItem(string pageName)
+    {
+        AppData.SetActivePage(pageName);
+        StateHasChanged();
+    }
+}
+
+
+

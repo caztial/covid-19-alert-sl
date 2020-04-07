@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Dashboard.Data;
+using Dashboard.Data.Services;
 
 namespace Dashboard
 {
@@ -27,7 +28,7 @@ namespace Dashboard
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<WeatherForecastService>();
+            services.AddScoped<AppData>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
