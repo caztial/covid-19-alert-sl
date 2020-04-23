@@ -54,7 +54,7 @@ namespace Application.Infastructure.Notification.Twitter
             tweet += "Total Deaths - " + hpbStatistic.LocalDeaths + "\n";
             tweet += "Updated on - " + hpbStatistic.LastUpdate + "\n";
             tweet += "More info visit https://www.hpb.health.gov.lk/" + "\n";
-            tweet += "@HPBSriLanka #lka #COVID19SL #COVID19";
+            tweet += "@HPBSriLanka #lka #COVID19SL #COVID19LK #COVID19";
 
             PostTweet(hpbStatistic,tweet, TwitterNotificationTypes.STATUS_UPDATE);
         }

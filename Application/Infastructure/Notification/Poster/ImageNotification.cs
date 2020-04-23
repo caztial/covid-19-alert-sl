@@ -45,7 +45,7 @@ namespace Application.Infastructure.Notification.Poster
                                 new Font(fontFamily, 80, FontStyle.Bold), Color.FromRgb(210, 9, 61), new PointF(40, 850)));
 
                 image.Mutate(ctx => ctx.DrawText(hpbStatistic.LocalRecoverd.ToString(),
-                                new Font(fontFamily, 90, FontStyle.Bold), Color.ForestGreen, new PointF(80, 1110)));
+                                new Font(fontFamily, 80, FontStyle.Bold), Color.ForestGreen, new PointF(40, 1110)));
 
                 image.Mutate(ctx => ctx.DrawText(hpbStatistic.LocalDeaths.ToString(),
                                 new Font(fontFamily, 90, FontStyle.Bold), Color.FromRgb(210, 9, 61), new PointF(80, 1355)));
